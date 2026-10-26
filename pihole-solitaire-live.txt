@@ -1,0 +1,77 @@
+# Title: Microsoft Solitaire Collection ads
+# Updated: 2026-10-26
+# Entries: 36
+# License: CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
+#
+# Format: ABP-style. "||domain^" blocks the domain itself and every subdomain,
+#         so one line replaces a whole family of ad hosts.
+#         This works in a NORMAL Pi-hole blocklist URL - no regex needed.
+# Requires: Pi-hole v6 (FTL >= 5.22 / Core >= 5.16). Native to v6, nothing to install.
+#
+# Add:  Settings > Lists > Add blocklist > paste the raw URL of this file
+#       then Tools > Update Gravity (gravity must parse it before it takes effect).
+# Edit: commit to GitHub, then Tools > Update Gravity. Editing this file does
+#       nothing until gravity re-runs - it is a snapshot, not a live query.
+#
+# Verified 2026-10-26 against Microsoft Solitaire Collection 4.27.9181.0 (Windows 11 26100).
+# Replaces both pihole-solitaire-ads.txt (122 exact domains) and pihole-solitaire-regex.txt.
+# Use ONE of them, not all three - they overlap.
+
+# --- A. the ad wrapper itself (the only part that changes over time) ---
+||domainreferrer.microsoftcasualgames.com^
+||domainreferrer3.microsoftcasualgames.com^
+# if ads come back after a game update, the wrapper version bumped.
+# Add the new one, commit, Update Gravity - nothing else needs to change:
+# ||domainreferrer4.microsoftcasualgames.com^
+
+# --- B. Xandr / AppNexus (MSX ServiceHost is ib.adnxs.com) ---
+||adnxs.com^
+||adnxs.net^
+||adnxs-simple.com^
+
+# --- C. Vungle / Liftoff (ad SDK bundled in the app) ---
+||vungle.com^
+||tls.vungle.edgesuite.net^
+
+# --- D. InMobi / AerServ ---
+||inmobi.com^
+||inmobicdn.net^
+||aerserv.com^
+||ads-inmobi-comtm.trafficmanager.net^
+||aerserv-ads.trafficmanager.net^
+||d3tplke66d0j4g.cloudfront.net^
+
+# --- E. Microsoft ad plumbing ---
+||ads.msn.com^
+||mobileads.msn.com^
+||srtb.msn.com^
+||partner.video.syndication.msn.com^
+||adbroker.mp.dse.microsoft.com^
+||msmonplat.trafficmanager.net^
+||mcg-msmonplat.trafficmanager.net^
+||bat.bing.com^
+||fp.msedge.net^
+# shared with MSN content - remove this one line first if an in-game pane stops loading
+||assets.msn.com^
+
+# --- F. other ad networks seen in this app's WebView2 cache ---
+||taboola.com^
+||taboolasyndication.com^
+||taboola.com.edgekey.net^
+||outbrain.com^
+||oooutbrain.com^
+||engageya.com^
+||openx.net^
+||casalemedia.com^
+||adtechus.com^
+||spotxcdn.com^
+||pubmatic.com^
+||rubiconproject.com^
+||amazon-adsystem.com^
+
+# --- G. deliberately NOT blocked ---
+# microsoftcasualgames.com   licensing + solitaireevents live here
+# zone.msn.com               in-game content and the R2P wrapper
+# c.msn.com                  MSN click tracking, shared with content
+# trafficmanager.net          shared Azure suffix
+# msn.com                    would break the game
