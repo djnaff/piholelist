@@ -1,0 +1,19 @@
+# Microsoft Solitaire Collection - Pi-hole REGEX list (optional, durable)
+# These go in the Regex list, NOT in an adlist/domains file:
+#   Pi-hole v5: /etc/pihole/regex.list   then: pihole restartdns
+#   Pi-hole v6: Settings/Domains > Regex filters
+# FTL uses POSIX extended regex, one pattern per line, no IP prefix.
+
+# catches domainreferrer, domainreferrer3, domainreferrer4 ... automatically
+(\.|^)domainreferrer[0-9]*\.microsoftcasualgames\.com$
+
+# Xandr / AppNexus, including regional ad servers (fra1-ib, ams3-ib, zne1-ib ...)
+(\.|^)adnxs\.com$
+(\.|^)adnxs\.net$
+(\.|^)adnxs-simple\.com$
+
+# Microsoft Advertising on MSN
+(\.|^)ads\.msn\.com$
+
+# Vungle SDK endpoints (any subdomain)
+(\.|^)[a-z0-9-]+\.ads\.vungle\.com$
